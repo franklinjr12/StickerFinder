@@ -1,17 +1,13 @@
-def resizeImages(images):
-    for image in images.results():
-        image.download('images')
-        STICKERSIZE = 512
-        STICKERCAPE = 96
-        image.resize(STICKERSIZE, STICKERSIZE)
-
-
 def downloadImages(query, num=1):
 
     from google_images_search import GoogleImagesSearch
+    from json import load
 
-    key = 'AIzaSyAVOyVYHvDOTNJQ9X_sJl9S3QTTYm77F94'
-    cx = '010616554259021102261:ywlgqeepufu'
+    with open('credentials.json') as f:
+        j = load(f)
+    key = j['key']
+    cx = j['cx']
+
     gis = GoogleImagesSearch(key, cx)
 
     _search_params = {
@@ -19,8 +15,5 @@ def downloadImages(query, num=1):
         'num': num,
     }
 
-    # print(_search_params)
-
-    # gis.search(search_params=_search_params)
-    # resizeImages(gis)
-    gis.search(search_params=_search_params, path_to_dir='images')
+    # assumes there is a folder with name images/query/
+    gis.search(search_params=_search_params, path_to_dir='images/'+query)
