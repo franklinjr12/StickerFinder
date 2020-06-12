@@ -1,16 +1,24 @@
-def downloadImages(query, num=1):
+from PIL import Image
+from gDownloadImages import *
+import os
 
-    from google_images_search import GoogleImagesSearch
+query = 'wow meme'
+number = 1
 
-    key = 'AIzaSyAVOyVYHvDOTNJQ9X_sJl9S3QTTYm77F94'
-    cx = '010616554259021102261:ywlgqeepufu'
-    gis = GoogleImagesSearch(key, cx)
+downloadImages(query, number)
 
-    _search_params = {
-        'q': query,
-        'num': num,
-    }
+STICKERSIZE = 512
+STICKERTHUMBNAILSIZE = 96
+imageName = str(os.listdir('images')[0])
+path = 'images/'
 
-    print(_search_params)
+im = Image.open(path+imageName)
 
-    gis.search(search_params=_search_params, path_to_dir='images')
+newIm = im.resize((STICKERSIZE, STICKERSIZE))
+newIm.save(path+'resized'+str(STICKERSIZE)+'_'+imageName)
+
+newIm = im.resize((STICKERTHUMBNAILSIZE, STICKERTHUMBNAILSIZE))
+newIm.save(path+'resized'+str(STICKERTHUMBNAILSIZE)+'_'+imageName)
+
+# resizeImage('images/', imName, STICKERSIZE, STICKERSIZE)
+# resizeImage('images/', imName, STICKERTHUMBNAILSIZE, STICKERTHUMBNAILSIZE)

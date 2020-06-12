@@ -2,7 +2,7 @@ import socket
 import sys
 import time
 
-HOST, PORT = "localhost", 51168
+HOST, PORT = "localhost", 9999#51168
 data = " ".join(sys.argv[1:])
 
 while True:
